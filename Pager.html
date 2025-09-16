@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pager & Portophone Solution Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Trebuchet+MS&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Trebuchet MS', Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .slide {
+            display: none;
+            min-height: 85vh;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .slide.active {
+            display: flex;
+        }
+        .picnic-red {
+            color: #E20413;
+        }
+        .bg-picnic-red {
+            background-color: #E20413;
+        }
+        .border-picnic-red {
+            border-color: #E20413;
+        }
+        .slide-title {
+            font-size: 2.25rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        .slide-subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: #888;
+        }
+        .footer-logo {
+            font-weight: bold;
+            color: #E20413;
+        }
+        .nav-button {
+            position: fixed;
+            bottom: 20px;
+            background-color: #E20413;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .nav-button:hover {
+            background-color: #c00310;
+        }
+        .nav-prev {
+            right: 110px;
+        }
+        .nav-next {
+            right: 20px;
+        }
+        .check { color: #22c55e; }
+        .cross { color: #ef4444; }
+        .warn { color: #f59e0b; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="presentation-container" class="max-w-6xl mx-auto relative">
+
+        <!-- Slide 1: Title Slide -->
+        <div class="slide active flex-col justify-center items-center text-center p-8">
+            <div>
+                <h1 class="slide-title" style="font-size: 2.75rem;">A Unified Pager & Portophone Solution for FCA</h1>
+                <p class="slide-subtitle mt-4">FF-NL-FCA Utrecht</p>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Goal (Pyramid Top) -->
+        <div class="slide flex-col justify-center p-8 md:p-12">
+            <h1 class="slide-title">The Goal: A modern, software-based solution for critical alerts and communication</h1>
+            <p class="slide-subtitle">We must replace our outdated hardware pager system and standardize on our new mobile platform.</p>
+            <div class="grid md:grid-cols-2 gap-8 mt-4 text-lg">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl mb-2">The Challenge</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Hardware pager system for PLC errors is outdated.</li>
+                        <li>Legacy Zebra devices are slow and being phased out.</li>
+                    </ul>
+                </div>
+                <div class="bg-picnic-red text-white p-6 rounded-lg">
+                    <h3 class="font-bold text-xl mb-2">The Desired State</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>**Modernize:** Critical PLC alerts on mobile devices.</li>
+                        <li>**Unify:** Portophone functionality for all captains.</li>
+                        <li>**Standardize:** Solution runs on the Honeywell CT45xp.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slide 3: Market Scan Details -->
+        <div class="slide flex-col justify-center p-8 md:p-12">
+            <h1 class="slide-title">Market Scan: A detailed look at all researched applications</h1>
+            <p class="slide-subtitle">Evaluating each platform against our core requirements: PLC Alerting and Portophone capabilities.</p>
+            <div class="w-full overflow-x-auto mt-4">
+                <table class="min-w-full text-left text-base md:text-lg">
+                    <thead class="border-b-2 border-black">
+                        <tr>
+                            <th class="p-2 md:p-4">Application</th>
+                            <th class="p-2 md:p-4 text-center">PLC Alerting</th>
+                            <th class="p-2 md:p-4 text-center">Portophone (PTT)</th>
+                            <th class="p-2 md:p-4">Est. Retail Cost (user/yr)</th>
+                            <th class="p-2 md:p-4">Verdict / Reason for Exclusion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b bg-green-50">
+                            <td class="p-2 md:p-4 font-bold">Derdack EnterpriseAlert</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl check">&#10004;</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl warn">&#9888;</td>
+                            <td class="p-2 md:p-4 picnic-red font-bold">~€402</td>
+                            <td class="p-2 md:p-4">Viable Unified Solution (PTT is voice calls)</td>
+                        </tr>
+                        <tr class="border-b bg-blue-50">
+                            <td class="p-2 md:p-4 font-bold">SIGNL4</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl check">&#10004;</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl cross">&#10008;</td>
+                            <td class="p-2 md:p-4 picnic-red font-bold">~€100</td>
+                            <td class="p-2 md:p-4">Viable Alerting Solution (needs PTT partner)</td>
+                        </tr>
+                        <tr class="border-b bg-blue-50">
+                            <td class="p-2 md:p-4 font-bold">Honeywell Smart Talk</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl cross">&#10008;</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl check">&#10004;</td>
+                            <td class="p-2 md:p-4 picnic-red font-bold">~€110</td>
+                            <td class="p-2 md:p-4">Viable PTT Solution (leverages partnership)</td>
+                        </tr>
+                        <tr class="bg-red-50">
+                            <td class="p-2 md:p-4 font-bold">Zello</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl cross">&#10008;</td>
+                            <td class="p-2 md:p-4 text-center font-bold text-2xl check">&#10004;</td>
+                            <td class="p-2 md:p-4 picnic-red font-bold">~€76</td>
+                            <td class="p-2 md:p-4">Excluded: No existing strategic partnership</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Slide 4: Two Viable Strategies (Argument 2) -->
+        <div class="slide flex-col justify-center items-center p-8 md:p-12">
+            <h1 class="slide-title text-center">This Narrows Our Choice to Two Viable Strategies</h1>
+            <p class="slide-subtitle text-center">The core decision is between a unified platform and a strategic partnership suite.</p>
+            <div class="w-full grid md:grid-cols-2 gap-8 mt-6">
+                <div class="border-2 border-gray-200 p-6 rounded-lg text-center">
+                    <h2 class="text-2xl font-bold mb-4">Option A: The Unified Platform</h2>
+                    <p class="mb-4">One application to manage both alerts and voice communication.</p>
+                    <div class="font-bold text-lg">
+                        <p class="text-green-600 mb-2">+ Simplicity & single vendor</p>
+                        <p class="text-red-600">- Higher cost & a compromise on PTT</p>
+                    </div>
+                </div>
+                <div class="border-2 border-picnic-red p-6 rounded-lg text-center">
+                    <h2 class="text-2xl font-bold mb-4">Option B: The Strategic Suite</h2>
+                    <p class="mb-4">A best-in-class alerting app paired with our hardware partner's PTT solution.</p>
+                    <div class="font-bold text-lg">
+                        <p class="text-green-600 mb-2">+ Superior PTT & leverages partnership</p>
+                        <p class="text-red-600">- Two apps to manage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Side-by-Side Comparison (Supporting Detail) -->
+        <div class="slide flex-col justify-center p-8 md:p-12">
+            <h1 class="slide-title">Side-by-Side Comparison: A data-driven view to inform our decision</h1>
+            <p class="slide-subtitle">Evaluating quality, user experience, and cost for the two final strategies.</p>
+            <div class="w-full overflow-x-auto mt-4">
+                <table class="min-w-full text-left text-lg">
+                    <thead class="border-b-2 border-black">
+                        <tr>
+                            <th class="p-4">Feature</th>
+                            <th class="p-4">Option A: Unified (Derdack)</th>
+                            <th class="p-4">Option B: Strategic Suite (SIGNL4 + Honeywell)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">Alerting Quality</td>
+                            <td class="p-4 text-green-700 font-bold">Excellent</td>
+                            <td class="p-4 text-green-700 font-bold">Excellent</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">Portophone Quality</td>
+                            <td class="p-4">Good (Voice Calls)</td>
+                            <td class="p-4 text-green-700 font-bold">Excellent (True PTT)</td>
+                        </tr>
+                        <tr class="border-b">
+                            <td class="p-4 font-bold">User Experience</td>
+                            <td class="p-4">Single Application</td>
+                            <td class="p-4">Two Separate Applications</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                            <td class="p-4 font-bold">Est. Total Retail Cost (user/yr)</td>
+                            <td class="p-4 font-bold text-xl picnic-red">~€402</td>
+                            <td class="p-4 font-bold text-xl picnic-red">~€210</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <p class="text-sm text-gray-500 mt-4">*Note: All costs are retail estimates and subject to enterprise negotiation. We have a strong hardware partnership with Honeywell, but no pre-existing software deal.</p>
+        </div>
+
+        <!-- Slide 6: Proposal (Conclusion) -->
+        <div class="slide flex-col justify-center p-8 md:p-12">
+            <h1 class="slide-title">Proposal: Implement the Strategic Suite Solution</h1>
+            <p class="slide-subtitle">We recommend moving forward with Option B: SIGNL4 for alerting and Honeywell Smart Talk for PTT.</p>
+            <div class="grid md:grid-cols-2 gap-8 mt-4 text-lg">
+                 <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl mb-2">Why this option?</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Delivers best-in-class performance for both functions.</li>
+                        <li>Most cost-effective solution.</li>
+                        <li>Strengthens our strategic partnership with Honeywell.</li>
+                    </ul>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-xl mb-2">Immediate Next Steps</h3>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Gain stakeholder approval for the solution.</li>
+                        <li>Initiate procurement for SIGNL4 licenses.</li>
+                        <li>Engage Honeywell to finalize Smart Talk software licenses.</li>
+                        <li>Schedule rollout and training with the FCA team.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <span class="footer-logo">PICNIC</span> | Confidential | <span id="slide-number">1</span> / 6
+    </div>
+
+    <div id="prev-btn" class="nav-button nav-prev">&larr; Prev</div>
+    <div id="next-btn" class="nav-button nav-next">Next &rarr;</div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideNumberEl = document.getElementById('slide-number');
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            slideNumberEl.textContent = `${index + 1} / ${slides.length}`;
+            
+            prevBtn.style.display = index === 0 ? 'none' : 'block';
+            nextBtn.style.display = index === slides.length - 1 ? 'none' : 'block';
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        });
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
+
